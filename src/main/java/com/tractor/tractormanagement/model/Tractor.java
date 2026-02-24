@@ -15,6 +15,8 @@ public class Tractor {
 
     private String name;
     private String model;
-    private double rentPerHour;
-    private String status; // Available / Not Available
+    private double pricePerHour;
+
+    @Enumerated(EnumType.STRING)
+    private TractorStatus status;
 }

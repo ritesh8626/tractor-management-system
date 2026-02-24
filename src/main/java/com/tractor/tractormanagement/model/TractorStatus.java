@@ -1,5 +1,7 @@
 package com.tractor.tractormanagement.model;
 
-public class TractorStatus {
-
+public enum TractorStatus {
+    AVAILABLE,
+    BOOKED,
+    MAINTENANCE
 }
