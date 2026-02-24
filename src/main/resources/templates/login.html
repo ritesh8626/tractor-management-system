@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login - Tractor Managment</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #2e7d32;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        nav {
+            background-color: #388e3c;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .login-container {
+            background-color: white;
+            width: 350px;
+            margin: 50px auto;
+            padding: 25px;
+            border-radius: 6px;
+            box-shadow: 0 0 8px rgba(0,0,0,0.2);
+        }
+
+        h2 {
+            text-align: center;
+            color: #2e7d32;
+        }
+
+        label {
+            display: block;
+            margin-top: 12px;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #2e7d32;
+            color: white;
+            border: none;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #1b5e20;
+        }
+
+        .error {
+            color: red;
+            text-align: center;
+            margin-top: 10px;
+            display: none;
+        }
+
+        footer {
+            background-color: #2e7d32;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Tractor Managment</h1>
+    <p>Login Page</p>
+</header>
+
+ 
+
+<div class="login-container">
+    <h2>User Login</h2>
+
+    <form onsubmit="loginUser(); return false;">
+        <label>Email</label>
+        <input type="email" id="email" required>
+
+        <label>Password</label>
+        <input type="password" id="password" required>
+
+        <label>Login As</label>
+        <select id="role" required>
+            <option value="">-- Select Role --</option>
+            <option>Farmer</option>
+            <option>Service Provider</option>
+            <option>Admin</option>
+        </select>
+
+        <button type="submit">Login</button>
+    </form>
+
+    <div class="error" id="errorMsg">
+        Invalid login details!
+    </div>
+</div>
+
+<script>
+    function loginUser() {
+        let email = document.getElementById("email").value;
+        let password = document.getElementById("password").value;
+        let role = document.getElementById("role").value;
+
+        if (email && password && role) {
+            window.location.href = "index.html";
+        } else {
+            document.getElementById("errorMsg").style.display = "block";
+        }
+    }
+</script>
+
+
+
+
+</body>
+</html>

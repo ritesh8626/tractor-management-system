@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Booking Page - Tractor Management</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #2e7d32;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        nav {
+            background-color: #388e3c;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .container {
+            background-color: white;
+            width: 400px;
+            margin: 40px auto;
+            padding: 25px;
+            border-radius: 6px;
+            box-shadow: 0 0 8px rgba(0,0,0,0.2);
+        }
+
+        h2 {
+            text-align: center;
+            color: #2e7d32;
+        }
+
+        label {
+            display: block;
+            margin-top: 12px;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #2e7d32;
+            color: white;
+            border: none;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #1b5e20;
+        }
+
+        .success {
+            text-align: center;
+            color: green;
+            margin-top: 15px;
+            display: none;
+        }
+
+        footer {
+            background-color: #2e7d32;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Tractor Managemnt</h1>
+    <p>Booking Page</p>
+</header>
+
+<nav>
+    <a href="index.html">Home</a>
+    <a href="#">Services</a>
+    <a href="#">Booking</a>
+</nav>
+
+<div class="container">
+    <h2>Book a Service</h2>
+
+    <form onsubmit="submitBooking(); return false;">
+        <label>Farmer Name</label>
+        <input type="text" id="farmerName" required>
+
+        <label>Mobile Number</label>
+        <input type="text" id="mobile" required>
+
+        <label>Service Type</label>
+        <select id="serviceType" required>
+            <option value="">-- Select Service --</option>
+            <option>Tractor</option>
+            <option>Farm Worker</option>
+        </select>
+
+        
+        <label>Booking Date</label>
+        <input type="date" id="date" required>
+
+        <button type="submit">Submit Booking</button>
+    </form>
+
+    <div class="success" id="successMsg">
+        ✔ Booking request submitted successfully!
+    </div>
+</div>
+
+
+<script>
+  function confirmBooking() {
+       window.location.href = "payment.html";
+}
+    
+</script>
+<script>
+function submitBooking() {
+
+    const bookingData = {
+        farmerName: document.getElementById("name").value,
+        tractorType: document.getElementById("tractor").value,
+        attachment: document.getElementById("attachment").value,
+        hours: document.getElementById("hours").value,
+        totalCost: document.getElementById("total").value
+    };
+
+    fetch("http://localhost:8080/api/bookings", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(bookingData)
+    })
+    .then(response => {
+        if(response.ok){
+            alert("Booking Saved Successfully!");
+
+            // You can pass amount if needed
+            localStorage.setItem("total", "2000");
+
+            window.location.href = "payment.html";
+        }
+    })
+    .catch(error => console.error("Error:", error));
+}
+</script>
+
+</body>
+</html>

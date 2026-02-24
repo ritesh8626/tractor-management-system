@@ -1,0 +1,109 @@
+ <!DOCTYPE html>
+<html>
+<head>
+    <title>Payment Page</title>
+
+    <style>
+        body { margin:0; font-family: Arial; background:#f4f4f4; }
+
+        header {
+            background:#2e7d32;
+            color:white;
+            padding:20px;
+            text-align:center;
+        }
+
+        .box {
+            background:white;
+            width:400px;
+            margin:40px auto;
+            padding:25px;
+            box-shadow:0 0 8px gray;
+            border-radius:6px;
+        }
+
+        h2 { color:#2e7d32; }
+
+        label { display:block; margin-top:15px; font-weight:bold; }
+
+        input, select {
+            width:100%;
+            padding:8px;
+            margin-top:5px;
+        }
+
+        button {
+            width:100%;
+            padding:10px;
+            margin-top:20px;
+            background:#2e7d32;
+            color:white;
+            border:none;
+            font-size:16px;
+            cursor:pointer;
+        }
+
+        button:hover { background:#1b5e20; }
+
+        .amount {
+            font-size:18px;
+            font-weight:bold;
+            color:#1b5e20;
+            margin-bottom:15px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Payment Page</h1>
+</header>
+
+<div class="box">
+
+    <h2>Complete Your Payment</h2>
+
+    <div class="amount">
+        Total Amount: ₹ <span id="totalAmount"></span>
+    </div>
+
+    <label>Select Payment Method</label>
+    <select id="paymentMethod">
+        <option value="">-- Select Method --</option>
+        <option>UPI</option>
+        <option>Debit/Credit Card</option>
+        <option>Cash on Service</option>
+    </select>
+
+    <label>Enter UPI ID / Card Number</label>
+    <input type="text" id="paymentDetails" placeholder="Enter details">
+
+    <button onclick="makePayment()">Pay Now</button>
+
+</div>
+
+<script>
+
+    // Load total from localStorage
+    document.getElementById("totalAmount").innerText = localStorage.getItem("total");
+
+    function makePayment() {
+
+        let method = document.getElementById("paymentMethod").value;
+
+        if(method === "") {
+            alert("Please select payment method!");
+            return;
+        }
+
+        alert("Payment Successful 🎉");
+
+        localStorage.clear();
+        window.location.href = "success.html";
+    }
+
+</script>
+
+</body>
+</html>

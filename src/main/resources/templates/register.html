@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration - Tractor Management</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #2e7d32;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .register-box {
+            background: white;
+            width: 400px;
+            margin: 40px auto;
+            padding: 25px;
+            box-shadow: 0 0 8px rgba(0,0,0,0.3);
+            border-radius: 5px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #2e7d32;
+        }
+
+        label {
+            display: block;
+            margin-top: 12px;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #2e7d32;
+            color: white;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background-color: #1b5e20;
+        }
+
+        .link {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .link a {
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Tractor Management</h1>
+    <p>User Registration</p>
+</header>
+
+<div class="register-box">
+    <h2>Create Account</h2>
+
+    <form onsubmit="registerUser(); return false;">
+        <label>Full Name</label>
+        <input type="text" required>
+
+        <label>Email</label>
+        <input type="email" required>
+
+        <label>Mobile Number</label>
+        <input type="text" required>
+
+        <label>Password</label>
+        <input type="password" required>
+
+        <label>Register As</label>
+        <select required>
+            <option value="">-- Select Role --</option>
+            <option>Farmer</option>
+            <option>Service Provider</option>
+        </select>
+
+        <button type="submit">Register</button>
+    </form>
+
+    <div class="link">
+        Already registered? <a href="login.html">Login</a>
+    </div>
+</div>
+
+<script>
+    function registerUser() {
+        alert("Registration successful! Please login.");
+        window.location.href = "login.html";
+    }
+</script>
+
+</body>
+</html>

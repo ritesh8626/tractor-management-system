@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>View All Services - Tractor Management</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #f4f4f4;
+            margin: 0;
+        }
+
+        header {
+            background: #2e7d32;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .container {
+            width: 90%;
+            margin: 30px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 6px;
+            box-shadow: 0 0 8px gray;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        th {
+            background: #388e3c;
+            color: white;
+            padding: 10px;
+        }
+
+        td {
+            padding: 8px;
+            text-align: center;
+        }
+
+        button {
+            padding: 6px 10px;
+            background: #2e7d32;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1b5e20;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>All Farmer Bookings</h1>
+</header>
+
+<div class="container">
+
+    <table id="serviceTable">
+        <tr>
+            <th>Farmer Name</th>
+            <th>Service</th>
+            <th>Booking Date</th>
+            <th>Status</th>
+            <th>Total Amount</th>
+            <th>Paid</th>
+            <th>Remaining</th>
+        </tr>
+    </table>
+
+</div>
+
+<script>
+
+// Example data (you can connect from booking page later)
+let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
+
+// If no data, create demo records
+if(bookings.length === 0){
+    bookings = [
+        {name:"Ramesh", service:"Tractor", date:"2026-02-20", total:5000, paid:3000},
+        {name:"Suresh", service:"Worker", date:"2026-02-25", total:4000, paid:4000}
+    ];
+}
+
+let table = document.getElementById("serviceTable");
+
+let today = new Date().toISOString().split("T")[0];
+
+bookings.forEach(b => {
+
+    let status = (b.date < today) ? "Booked Earlier" : "Booked Today/Upcoming";
+    let remaining = b.total - b.paid;
+
+    let row = table.insertRow(-1);
+
+    row.insertCell(0).innerHTML = b.name;
+    row.insertCell(1).innerHTML = b.service;
+    row.insertCell(2).innerHTML = b.date;
+    row.insertCell(3).innerHTML = status;
+    row.insertCell(4).innerHTML = "₹ " + b.total;
+    row.insertCell(5).innerHTML = "₹ " + b.paid;
+    row.insertCell(6).innerHTML = "₹ " + remaining;
+
+});
+
+</script>
+
+</body>
+</html>
