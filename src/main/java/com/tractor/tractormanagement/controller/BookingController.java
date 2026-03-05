@@ -1,16 +1,31 @@
 package com.tractor.tractormanagement.controller;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.util.List;
-import com.tractor.tractormanagement.model.*;
-import com.tractor.tractormanagement.repository.*;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.tractor.tractormanagement.model.Booking;
+import com.tractor.tractormanagement.model.PaymentStatus;
+import com.tractor.tractormanagement.model.Tractor;
+import com.tractor.tractormanagement.model.User;
+import com.tractor.tractormanagement.model.Worker;
+import com.tractor.tractormanagement.repository.BookingRepository;
+import com.tractor.tractormanagement.repository.TractorRepository;
+import com.tractor.tractormanagement.repository.UserRepository;
+import com.tractor.tractormanagement.repository.WorkerRepository;
+
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api/bookings")
-@RequiredArgsConstructor
 @CrossOrigin("*")
+@RequiredArgsConstructor
 public class BookingController {
 
     private final BookingRepository bookingRepository;
@@ -18,31 +33,36 @@ public class BookingController {
     private final TractorRepository tractorRepository;
     private final WorkerRepository workerRepository;
 
-    @PostMapping("/{userId}/{tractorId}/{workerId}")
-    public Booking createBooking(
-            @PathVariable Long userId,
-            @PathVariable Long tractorId,
-            @PathVariable Long workerId,
-            @RequestBody Booking booking) {
+    @PostMapping
+    public Booking createBooking(@RequestBody Booking bookingRequest) {
+        // Fetch actual entities from DB (optional, if you send only IDs in request)
+        User user = userRepository.findById(bookingRequest.getAppUser().getId())
+                .orElseThrow(() -> new RuntimeException("User not found"));
 
-        User user = userRepository.findById(userId).orElseThrow();
-        Tractor tractor = tractorRepository.findById(tractorId).orElseThrow();
-        Worker worker = workerRepository.findById(workerId).orElseThrow();
+        Tractor tractor = tractorRepository.findById(bookingRequest.getTractor().getId())
+                .orElseThrow(() -> new RuntimeException("Tractor not found"));
 
-        booking.setAppUser(user);
+        Worker worker = workerRepository.findById(bookingRequest.getWorker().getId())
+                .orElseThrow(() -> new RuntimeException("Worker not found"));
+
+        Booking booking = new Booking();
+        booking.setAppUser(user);               // Use correct field name
         booking.setTractor(tractor);
         booking.setWorker(worker);
+        booking.setHours(bookingRequest.getHours());
+        booking.setTotalAmount(bookingRequest.getTotalAmount());
         booking.setBookingDate(LocalDate.now());
-        booking.setPaymentStatus(PaymentStatus.PENDING);
 
-        tractor.setStatus(TractorStatus.BOOKED);
-        tractorRepository.save(tractor);
+        // Make sure you pass PaymentStatus, not String
+        booking.setPaymentStatus(
+                bookingRequest.getPaymentStatus() != null ? bookingRequest.getPaymentStatus() : PaymentStatus.PENDING
+        );
 
         return bookingRepository.save(booking);
     }
 
     @GetMapping
-    public List<Booking> getAll() {
+    public List<Booking> getAllBookings() {
         return bookingRepository.findAll();
     }
 }
