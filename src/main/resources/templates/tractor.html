@@ -175,39 +175,51 @@
 
 <script>
 
-function calculateTotal() {
-    let tractorPrice = 0;
-    let hours = document.getElementById("hours").value;
+function calculateTotal(){
 
-    // Get selected tractor
-    let tractors = document.getElementsByName("tractor");
-    for (let i = 0; i < tractors.length; i++) {
-        if (tractors[i].checked) {
-            tractorPrice = parseInt(tractors[i].value);
-        }
-    }
+let tractorPrice=0;
+let hours=document.getElementById("hours").value;
 
-    // Get selected attachments
-    let checkboxes = document.querySelectorAll("input[type='checkbox']");
-    let attachmentTotal = 0;
-    checkboxes.forEach(function(box) {
-        if (box.checked) {
-            attachmentTotal += parseInt(box.value);
-        }
-    });
+let tractors=document.getElementsByName("tractor");
 
-    let total = (tractorPrice + attachmentTotal) * hours;
+for(let i=0;i<tractors.length;i++){
 
-    document.getElementById("total").innerText = total;
+if(tractors[i].checked){
+
+tractorPrice=parseInt(tractors[i].value);
+
 }
 
-function goToBooking() {
-    alert("Booking Total: ₹ " + document.getElementById("total").innerText);
-} 
-function goToBooking() {
- window.location.href = "booking.html";
 }
+
+let checkboxes=document.querySelectorAll("input[type='checkbox']");
+
+let attachmentTotal=0;
+
+checkboxes.forEach(function(box){
+
+if(box.checked){
+
+attachmentTotal+=parseInt(box.value);
+
+}
+
+});
+
+let total=(tractorPrice+attachmentTotal)*hours;
+
+document.getElementById("total").innerText=total;
+
+localStorage.setItem("total",total);
+
+}
+
+function goToBooking(){
+
+window.location.href="/booking";
+
+}
+
 </script>
-
 </body>
 </html>

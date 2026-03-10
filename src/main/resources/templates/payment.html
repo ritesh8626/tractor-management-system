@@ -85,23 +85,25 @@
 
 <script>
 
-    // Load total from localStorage
-    document.getElementById("totalAmount").innerText = localStorage.getItem("total");
+document.getElementById("totalAmount").innerText=localStorage.getItem("total");
 
-    function makePayment() {
+function makePayment(){
 
-        let method = document.getElementById("paymentMethod").value;
+let method=document.getElementById("paymentMethod").value;
 
-        if(method === "") {
-            alert("Please select payment method!");
-            return;
-        }
+if(method===""){
 
-        alert("Payment Successful 🎉");
+alert("Please select payment method");
 
-        localStorage.clear();
-        window.location.href = "success.html";
-    }
+return;
+
+}
+
+alert("Payment Successful");
+
+window.location.href="/success";
+
+}
 
 </script>
 

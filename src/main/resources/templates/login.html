@@ -128,17 +128,22 @@
 </div>
 
 <script>
-    function loginUser() {
-        let email = document.getElementById("email").value;
-        let password = document.getElementById("password").value;
-        let role = document.getElementById("role").value;
+function loginUser() {
 
-        if (email && password && role) {
-            window.location.href = "index.html";
-        } else {
-            document.getElementById("errorMsg").style.display = "block";
-        }
+    let email = document.getElementById("email").value;
+    let password = document.getElementById("password").value;
+    let role = document.getElementById("role").value;
+
+    if(email && password && role){
+
+        window.location.href="/index";
+
+    }else{
+
+        document.getElementById("errorMsg").style.display="block";
+
     }
+}
 </script>
 
 
