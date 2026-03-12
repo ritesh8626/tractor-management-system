@@ -13,7 +13,7 @@ public class PageController {
 
     @GetMapping("/index")
     public String index() {
-        return "index";
+        return "index.html";
     }
 
     @GetMapping("/register")
