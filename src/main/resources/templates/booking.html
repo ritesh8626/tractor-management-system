@@ -1,141 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Booking Page - Tractor Management</title>
+<meta charset="UTF-8">
+<title>Booking Page - Tractor Management</title>
 
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-        }
+<style>
 
-        header {
-            background-color: #2e7d32;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
+body{
+margin:0;
+font-family:Arial, sans-serif;
+background:#f4f4f4;
+}
 
-        nav {
-            background-color: #388e3c;
-            padding: 10px;
-            text-align: center;
-        }
+header{
+background:#2e7d32;
+color:white;
+padding:20px;
+text-align:center;
+}
 
-        nav a {
-            color: white;
-            margin: 0 15px;
-            text-decoration: none;
-            font-weight: bold;
-        }
+.container{
+background:white;
+width:400px;
+margin:40px auto;
+padding:25px;
+border-radius:6px;
+box-shadow:0 0 8px rgba(0,0,0,0.2);
+}
 
-        .container {
-            background-color: white;
-            width: 400px;
-            margin: 40px auto;
-            padding: 25px;
-            border-radius: 6px;
-            box-shadow: 0 0 8px rgba(0,0,0,0.2);
-        }
+h2{
+text-align:center;
+color:#2e7d32;
+}
 
-        h2 {
-            text-align: center;
-            color: #2e7d32;
-        }
+label{
+display:block;
+margin-top:12px;
+font-weight:bold;
+}
 
-        label {
-            display: block;
-            margin-top: 12px;
-            font-weight: bold;
-        }
+input,select{
+width:100%;
+padding:8px;
+margin-top:5px;
+}
 
-        input, select {
-            width: 100%;
-            padding: 8px;
-            margin-top: 5px;
-        }
+button{
+width:100%;
+margin-top:20px;
+padding:10px;
+background:#2e7d32;
+color:white;
+border:none;
+font-size:16px;
+border-radius:4px;
+cursor:pointer;
+}
 
-        button {
-            width: 100%;
-            margin-top: 20px;
-            padding: 10px;
-            background-color: #2e7d32;
-            color: white;
-            border: none;
-            font-size: 16px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
+button:hover{
+background:#1b5e20;
+}
 
-        button:hover {
-            background-color: #1b5e20;
-        }
-
-        .success {
-            text-align: center;
-            color: green;
-            margin-top: 15px;
-            display: none;
-        }
-
-        footer {
-            background-color: #2e7d32;
-            color: white;
-            text-align: center;
-            padding: 10px;
-            position: fixed;
-            width: 100%;
-            bottom: 0;
-        }
-    </style>
+</style>
 </head>
 
 <body>
 
 <header>
-    <h1>Tractor Managemnt</h1>
-    <p>Booking Page</p>
+<h1>Tractor Management</h1>
+<p>Booking Page</p>
 </header>
 
-<nav>
-    <a href="index.html">Home</a>
-    <a href="#">Services</a>
-    <a href="#">Booking</a>
-</nav>
-
 <div class="container">
-    <h2>Book a Service</h2>
 
-    <form onsubmit="submitBooking(); return false;">
-        <label>Farmer Name</label>
-        <input type="text" id="farmerName" required>
+<h2>Book a Service</h2>
 
-        <label>Mobile Number</label>
-        <input type="text" id="mobile" required>
+<form onsubmit="submitBooking(); return false;">
 
-        <label>Service Type</label>
-        <select id="serviceType" required>
-            <option value="">-- Select Service --</option>
-            <option>Tractor</option>
-            <option>Farm Worker</option>
-        </select>
+<label>Farmer Name</label>
+<input type="text" id="farmerName" required>
 
-        
-        <label>Booking Date</label>
-        <input type="date" id="date" required>
+<label>Mobile Number</label>
+<input type="text" id="mobile" required>
 
-        <button type="submit">Submit Booking</button>
-    </form>
+<label>Service Type</label>
+<select id="serviceType" onchange="toggleWorkerType()" required>
+<option value="">-- Select Service --</option>
+<option value="Tractor">Tractor</option>
+<option value="Worker">Farm Worker</option>
+</select>
 
-    <div class="success" id="successMsg">
-        ✔ Booking request submitted successfully!
-    </div>
+<label id="workerLabel" style="display:none;">Worker Type</label>
+<select id="workerType" style="display:none;">
+<option value="">-- Select Worker Type --</option>
+<option>Ploughing Worker</option>
+<option>Seeder Operator</option>
+<option>Harvester Operator</option>
+<option>Irrigation Worker</option>
+</select>
+
+<label>Booking Date</label>
+<input type="date" id="date" required>
+
+<button type="submit">Submit Booking</button>
+
+</form>
+
 </div>
 
-
 <script>
+
+function toggleWorkerType(){
+
+let service=document.getElementById("serviceType").value;
+let worker=document.getElementById("workerType");
+let workerLabel=document.getElementById("workerLabel");
+
+if(service==="Worker"){
+worker.style.display="block";
+workerLabel.style.display="block";
+}else{
+worker.style.display="none";
+workerLabel.style.display="none";
+}
+
+}
 
 function submitBooking(){
 
@@ -144,33 +133,35 @@ const bookingData={
 farmerName:document.getElementById("farmerName").value,
 mobile:document.getElementById("mobile").value,
 serviceType:document.getElementById("serviceType").value,
-date:document.getElementById("date").value
+workerType:document.getElementById("workerType").value,
+bookingDate:document.getElementById("date").value
 
 };
 
 fetch("/api/bookings",{
 
 method:"POST",
-
 headers:{
-
 "Content-Type":"application/json"
-
 },
-
 body:JSON.stringify(bookingData)
 
 })
+.then(response => response.json())
+.then(data => {
 
-.then(response=>{
+alert("Booking Successful");
 
-if(response.ok){
+/* redirect to payment page */
+window.location.href="payment.html";
 
-alert("Booking Saved Successfully");
+})
+.catch(error => {
 
-window.location.href="/payment";
+console.log(error);
 
-}
+/* still redirect even if API fails */
+window.location.href="payment.html";
 
 });
 

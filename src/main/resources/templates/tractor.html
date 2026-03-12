@@ -1,124 +1,140 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Farm Service Hiring</title>
+<meta charset="UTF-8">
+<title>Farm Service Hiring</title>
 
-    <style>
-        body { margin:0; font-family: Arial; background:#f4f4f4; }
-        header { background:#2e7d32; color:white; padding:20px; text-align:center; }
-        h2 { text-align:center; color:#2e7d32; margin-top:25px; }
+<style>
 
-        .container {
-            display:flex;
-            flex-wrap:wrap;
-            justify-content:center;
-        }
+body{margin:0;font-family:Arial;background:#f4f4f4;}
 
-        .card {
-            background:white;
-            width:230px;
-            margin:15px;
-            padding:15px;
-            text-align:center;
-            border-radius:6px;
-            box-shadow:0 0 8px rgba(0,0,0,0.2);
-        }
+header{
+background:#2e7d32;
+color:white;
+padding:20px;
+text-align:center;
+}
 
-        .card img {
-            width:100%;
-            height:140px;
-            object-fit:cover;
-            border-radius:4px;
-        }
+h2{
+text-align:center;
+color:#2e7d32;
+margin-top:25px;
+}
 
-        .card h3 { color:#2e7d32; }
+.container{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+}
 
-        input[type="radio"], input[type="checkbox"] {
-            transform:scale(1.2);
-            margin-top:8px;
-        }
+.card{
+background:white;
+width:230px;
+margin:15px;
+padding:15px;
+text-align:center;
+border-radius:6px;
+box-shadow:0 0 8px rgba(0,0,0,0.2);
+}
 
-        .hours-box {
-            text-align:center;
-            margin:20px;
-        }
+.card img{
+width:100%;
+height:140px;
+object-fit:cover;
+border-radius:4px;
+}
 
-        .hours-box input {
-            padding:8px;
-            width:120px;
-            text-align:center;
-        }
+.card h3{color:#2e7d32;}
 
-        .total-box {
-            text-align:center;
-            font-size:20px;
-            font-weight:bold;
-            margin-top:20px;
-            color:#1b5e20;
-        }
+input[type="radio"],input[type="checkbox"]{
+transform:scale(1.2);
+margin-top:8px;
+}
 
-        .btn {
-            display:block;
-            width:250px;
-            margin:20px auto;
-            padding:12px;
-            background:#2e7d32;
-            color:white;
-            border:none;
-            font-size:16px;
-            cursor:pointer;
-            border-radius:5px;
-        }
+.hours-box{
+text-align:center;
+margin:20px;
+}
 
-        .btn:hover { background:#1b5e20; }
-    </style>
+.hours-box input{
+padding:8px;
+width:120px;
+text-align:center;
+}
+
+.total-box{
+text-align:center;
+font-size:20px;
+font-weight:bold;
+margin-top:20px;
+color:#1b5e20;
+}
+
+.btn{
+display:block;
+width:250px;
+margin:20px auto;
+padding:12px;
+background:#2e7d32;
+color:white;
+border:none;
+font-size:16px;
+cursor:pointer;
+border-radius:5px;
+}
+
+.btn:hover{
+background:#1b5e20;
+}
+
+</style>
 </head>
 
 <body>
 
 <header>
-    <h1>Farm Service Hiring System</h1>
-    <p>Select Tractor + Attachments</p>
+<h1>Farm Service Hiring System</h1>
+<p>Select Tractor + Attachments</p>
 </header>
 
 <h2>🚜 Select Tractor</h2>
 
 <div class="container">
 
-    <div class="card">
-         <img src=" https://assets.khetigaadi.com/new-tractor/Mahindra-Yuvo-575-DI1735709902_hAsKJfpk3.png">
-        <h3>Mahindra 575 DI</h3>
-        <p>₹800 / hour</p>
-        <input type="radio" name="tractor" value="800" onclick="calculateTotal()"> Select
-    </div>
+<div class="card">
+<img src="https://assets.khetigaadi.com/new-tractor/Mahindra-Yuvo-575-DI1735709902_hAsKJfpk3.png">
+<h3>Mahindra 575 DI</h3>
+<p>₹800 / hour</p>
+<input type="radio" name="tractor" value="800" onclick="calculateTotal()"> Select
+</div>
 
-    <div class="card">
-         <img src=" https://assets.khetigaadi.com/new-tractor/Swaraj-744-FE-4WD1733124209_Q_bRfo-Hu.png">
-        <h3>Swaraj 744 FE</h3>
-        <p>₹900 / hour</p>
-        <input type="radio" name="tractor" value="900" onclick="calculateTotal()"> Select
-    </div>
+<div class="card">
+<img src="https://assets.khetigaadi.com/new-tractor/Swaraj-744-FE-4WD1733124209_Q_bRfo-Hu.png">
+<h3>Swaraj 744 FE</h3>
+<p>₹900 / hour</p>
+<input type="radio" name="tractor" value="900" onclick="calculateTotal()"> Select
+</div>
 
-    <div class="card">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_m-_X5v00nE72CaFwj0vGBlhFEhzGfNe1jw&s ">
-        <h3>John Deere 5310</h3>
-        <p>₹1000 / hour</p>
-        <input type="radio" name="tractor"  value="1000" onclick="calculateTotal()"> Select
-    </div>
-    <div class="card">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmJHH-0ujNpEwOl2QcrASwxEkPWwRQKKABdQ&s">
-            <h3>JCB</h3>
-            <p>1200/hour</p>
-            <input type="radio" name="JCB" value="1200" onclick="calculateTotal()"> Select
-        </div>
-        <div class="card">
-            <img src=" https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyScRlE0bEeMmrwYo9ZuhRf4hawMO8SBEcOQ&s">
-            <h3>Pocklane</h3>
-            <p>2500/hour</p>
-            <input type="radio" name="JCB" value="2500" onclick="calculateTotal()"> Select
-        </div>
+<div class="card">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_m-_X5v00nE72CaFwj0vGBlhFEhzGfNe1jw&s">
+<h3>John Deere 5310</h3>
+<p>₹1000 / hour</p>
+<input type="radio" name="tractor" value="1000" onclick="calculateTotal()"> Select
+</div>
 
+<div class="card">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmJHH-0ujNpEwOl2QcrASwxEkPWwRQKKABdQ&s">
+<h3>JCB</h3>
+<p>₹1200 / hour</p>
+<input type="radio" name="tractor" value="1200" onclick="calculateTotal()"> Select
+</div>
+
+<div class="card">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyScRlE0bEeMmrwYo9ZuhRf4hawMO8SBEcOQ&s">
+<h3>Pocklane</h3>
+<p>₹2500 / hour</p>
+<input type="radio" name="tractor" value="2500" onclick="calculateTotal()"> Select
+</div>
 
 </div>
 
@@ -126,49 +142,50 @@
 
 <div class="container">
 
-    <div class="card">
-         <img src=" https://www.fieldking.com/blogs/wp-content/uploads/2023/03/Tractor-Trailer.png">
-        <h3>Trailer</h3>
-        <p>₹300 / hour</p>
-        <input type="checkbox" value="300" onclick="calculateTotal()"> Add
-    </div>
+<div class="card">
+<img src="https://www.fieldking.com/blogs/wp-content/uploads/2023/03/Tractor-Trailer.png">
+<h3>Trailer</h3>
+<p>₹300 / hour</p>
+<input type="checkbox" value="300" onclick="calculateTotal()"> Add
+</div>
 
-    <div class="card">
-         <img src=" https://www.mahindratractor.com/sites/default/files/2025-07/Blog%2010%20Guide%20to%20Tractor%20Cultivator%20Types%2C%20Benefits%2C%20and%20How%20to%20Attach%20Them-Detail.webp ">
-        <h3>Cultivator</h3>
-        <p>₹250 / hour</p>
-        <input type="checkbox" value="250" onclick="calculateTotal()"> Add
-    </div>
+<div class="card">
+<img src="https://www.mahindratractor.com/sites/default/files/2025-07/Blog%2010%20Guide%20to%20Tractor%20Cultivator%20Types%2C%20Benefits%2C%20and%20How%20to%20Attach%20Them-Detail.webp">
+<h3>Cultivator</h3>
+<p>₹250 / hour</p>
+<input type="checkbox" value="250" onclick="calculateTotal()"> Add
+</div>
 
-    <div class="card">
-        <img src=" https://mahindrafarmmachinery.com/sites/default/files/inline-images/Mahindra%20Tez-e%20ZLX%2B.png">
-        <h3>Rotavator</h3>
-        <p>₹400 / hour</p>
-        <input type="checkbox" value="400" onclick="calculateTotal()"> Add
-    </div>
+<div class="card">
+<img src="https://mahindrafarmmachinery.com/sites/default/files/inline-images/Mahindra%20Tez-e%20ZLX%2B.png">
+<h3>Rotavator</h3>
+<p>₹400 / hour</p>
+<input type="checkbox" value="400" onclick="calculateTotal()"> Add
+</div>
 
-    <div class="card">
-          <img src="  https://www.fieldking.com/blogs/wp-content/uploads/2024/09/Ploughing.jpg">
-        <h3>Plough</h3>
-        <p>₹200 / hour</p>
-        <input type="checkbox" value="200" onclick="calculateTotal()"> Add
-    </div>
-     <div class="card">
-        <img src="https://5.imimg.com/data5/SELLER/Default/2022/7/MF/YI/XY/157093304/zeero-drill-seed-drill.jpg ">
-        <h3>Seed Drill Machine</h3>
-        <p>₹800 / hour</p>
-        <input type="checkbox" value="800" onclick="calculateTotal()"> Add
-    </div>
+<div class="card">
+<img src="https://www.fieldking.com/blogs/wp-content/uploads/2024/09/Ploughing.jpg">
+<h3>Plough</h3>
+<p>₹200 / hour</p>
+<input type="checkbox" value="200" onclick="calculateTotal()"> Add
+</div>
+
+<div class="card">
+<img src="https://5.imimg.com/data5/SELLER/Default/2022/7/MF/YI/XY/157093304/zeero-drill-seed-drill.jpg">
+<h3>Seed Drill Machine</h3>
+<p>₹800 / hour</p>
+<input type="checkbox" value="800" onclick="calculateTotal()"> Add
+</div>
 
 </div>
 
 <div class="hours-box">
-    <label><b>Enter Hours:</b></label><br>
-    <input type="number" id="hours" min="1" value="1" onchange="calculateTotal()">
+<label><b>Enter Hours:</b></label><br>
+<input type="number" id="hours" min="1" value="1" onchange="calculateTotal()">
 </div>
 
 <div class="total-box">
-    Total Cost: ₹ <span id="total">0</span>
+Total Cost: ₹ <span id="total">0</span>
 </div>
 
 <button class="btn" onclick="goToBooking()">Proceed to Booking</button>
@@ -183,27 +200,18 @@ let hours=document.getElementById("hours").value;
 let tractors=document.getElementsByName("tractor");
 
 for(let i=0;i<tractors.length;i++){
-
 if(tractors[i].checked){
-
 tractorPrice=parseInt(tractors[i].value);
-
 }
-
 }
 
 let checkboxes=document.querySelectorAll("input[type='checkbox']");
-
 let attachmentTotal=0;
 
 checkboxes.forEach(function(box){
-
 if(box.checked){
-
 attachmentTotal+=parseInt(box.value);
-
 }
-
 });
 
 let total=(tractorPrice+attachmentTotal)*hours;
@@ -216,10 +224,25 @@ localStorage.setItem("total",total);
 
 function goToBooking(){
 
-window.location.href="/booking";
+let tractors=document.getElementsByName("tractor");
+let selected=false;
+
+for(let i=0;i<tractors.length;i++){
+if(tractors[i].checked){
+selected=true;
+}
+}
+
+if(!selected){
+alert("Please select a tractor first");
+return;
+}
+
+window.location.href="booking.html";
 
 }
 
 </script>
+
 </body>
 </html>

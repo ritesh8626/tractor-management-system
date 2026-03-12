@@ -1,72 +1,177 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>My Tractors</title>
-    <style>
-        body { font-family: Arial; background:#f4f4f4; }
-        header { background:#2e7d32; color:white; padding:20px; text-align:center; }
+<title>My Tractors</title>
 
-        table {
-            width: 90%;
-            margin: 30px auto;
-            border-collapse: collapse;
-            background: white;
-        }
+<style>
 
-        th, td {
-            border: 1px solid #ccc;
-            padding: 10px;
-            text-align: center;
-        }
+body{
+font-family:Arial;
+background:#f4f4f4;
+margin:0;
+}
 
-        th {
-            background: #388e3c;
-            color: white;
-        }
+header{
+background:#2e7d32;
+color:white;
+padding:20px;
+text-align:center;
+}
 
-        button {
-            padding: 6px 10px;
-            background: #2e7d32;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
+table{
+width:90%;
+margin:30px auto;
+border-collapse:collapse;
+background:white;
+}
 
-        button:hover { background:#1b5e20; }
-    </style>
+th,td{
+border:1px solid #ccc;
+padding:10px;
+text-align:center;
+}
+
+th{
+background:#388e3c;
+color:white;
+}
+
+button{
+padding:6px 12px;
+background:#2e7d32;
+color:white;
+border:none;
+cursor:pointer;
+}
+
+button:hover{
+background:#1b5e20;
+}
+
+.form-box{
+width:90%;
+margin:auto;
+background:white;
+padding:20px;
+box-shadow:0 0 6px gray;
+border-radius:6px;
+}
+
+input,select{
+padding:8px;
+margin:5px;
+}
+
+</style>
 </head>
 
 <body>
 
 <header>
-    <h1>My Tractors</h1>
+<h1>My Tractors</h1>
 </header>
 
-<table>
-    <tr>
-        <th>Tractor Name</th>
-        <th>Model</th>
-        <th>Rent (₹/hour)</th>
-        <th>Status</th>
-        <th>Action</th>
-    </tr>
+<table id="tractorTable">
 
-    <tr>
-        <td>Mahindra 575 DI</td>
-        <td>2022</td>
-        <td>800</td>
-        <td>Available</td>
-        <td><button>Edit</button></td>
-    </tr>
+<tr>
+<th>Tractor Name</th>
+<th>Model</th>
+<th>Rent (₹/hour)</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
 
-    <tr>
-        <td>Swaraj 744 FE</td>
-        <td>2021</td>
-        <td>900</td>
-        <td>Not Available</td>
-        <td><button>Edit</button></td>
-    </tr>
+<tr>
+<td>Mahindra 575 DI</td>
+<td>2022</td>
+<td>800</td>
+<td class="status">Available</td>
+<td><button onclick="editStatus(this)">Edit</button></td>
+</tr>
+
+<tr>
+<td>Swaraj 744 FE</td>
+<td>2021</td>
+<td>900</td>
+<td class="status">Not Available</td>
+<td><button onclick="editStatus(this)">Edit</button></td>
+</tr>
+
 </table>
+
+
+<div class="form-box">
+
+<h3>Add Tractor</h3>
+
+<input type="text" id="name" placeholder="Tractor Name">
+<input type="text" id="model" placeholder="Model">
+<input type="number" id="rent" placeholder="Rent/hour">
+
+<select id="status">
+<option>Available</option>
+<option>Not Available</option>
+</select>
+
+<button onclick="addTractor()">Add Tractor</button>
+
+</div>
+
+
+<script>
+
+function editStatus(button){
+
+let row=button.parentElement.parentElement;
+
+let statusCell=row.querySelector(".status");
+
+if(statusCell.innerText==="Available"){
+
+statusCell.innerText="Not Available";
+
+}else{
+
+statusCell.innerText="Available";
+
+}
+
+}
+
+
+function addTractor(){
+
+let name=document.getElementById("name").value;
+let model=document.getElementById("model").value;
+let rent=document.getElementById("rent").value;
+let status=document.getElementById("status").value;
+
+if(name==="" || model==="" || rent===""){
+
+alert("Please fill all fields");
+return;
+
+}
+
+let table=document.getElementById("tractorTable");
+
+let row=table.insertRow();
+
+row.innerHTML=`
+<td>${name}</td>
+<td>${model}</td>
+<td>${rent}</td>
+<td class="status">${status}</td>
+<td><button onclick="editStatus(this)">Edit</button></td>
+`;
+
+document.getElementById("name").value="";
+document.getElementById("model").value="";
+document.getElementById("rent").value="";
+
+}
+
+</script>
 
 </body>
 </html>
