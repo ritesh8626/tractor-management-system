@@ -1,144 +1,173 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Farm Service Hiring System</title>
+<meta charset="UTF-8">
+<title>Farm Service Hiring System</title>
 
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-        }
+<style>
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background-color:#f4f4f4;
+}
 
-        header {
-            background-color: #2e7d32;
-            color: white;
-            padding: 25px;
-            text-align: center;
-        }
+header{
+background-color:#2e7d32;
+color:white;
+padding:25px;
+text-align:center;
+}
 
-        nav {
-            background-color: #388e3c;
-            padding: 12px;
-            text-align: center;
-        }
+nav{
+background-color:#388e3c;
+padding:12px;
+text-align:center;
+}
 
-        nav a {
-            color: white;
-            margin: 0 15px;
-            text-decoration: none;
-            font-size: 16px;
-            font-weight: bold;
-        }
+nav a{
+color:white;
+margin:0 15px;
+text-decoration:none;
+font-size:16px;
+font-weight:bold;
+}
 
-        nav a:hover {
-            text-decoration: underline;
-        }
+nav a:hover{
+text-decoration:underline;
+}
 
-        .hero {
-            background-color: white;
-            padding: 50px 20px;
-            text-align: center;
-        }
+.hero{
+background-color:white;
+padding:50px 20px;
+text-align:center;
+}
 
-        .hero h2 {
-            font-size: 30px;
-            color: #2e7d32;
-        }
+.hero h2{
+font-size:30px;
+color:#2e7d32;
+}
 
-        .hero p {
-            font-size: 18px;
-            color: #555;
-        }
+.hero p{
+font-size:18px;
+color:#555;
+}
 
-        .hero button {
-            margin-top: 20px;
-            padding: 12px 25px;
-            background-color: #2e7d32;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-        }
+/* NEW SERVICE SECTION */
+.service-area{
+display:flex;
+align-items:center;
+justify-content:center;
+gap:30px;
+margin-top:30px;
+}
 
-        .hero button:hover {
-            background-color: #1b5e20;
-        }
+.service-area img{
+width:180px;
+height:120px;
+object-fit:cover;
+border-radius:6px;
+box-shadow:0 0 6px rgba(0,0,0,0.3);
+}
 
-        .features {
-            padding: 40px;
-            text-align: center;
-        }
+.hero button{
+padding:12px 25px;
+background-color:#2e7d32;
+color:white;
+border:none;
+border-radius:5px;
+font-size:16px;
+cursor:pointer;
+}
 
-        .feature-box {
-            background-color: white;
-            display: inline-block;
-            width: 250px;
-            margin: 15px;
-            padding: 20px;
-            border-radius: 6px;
-            box-shadow: 0 0 5px rgba(0,0,0,0.2);
-        }
+.hero button:hover{
+background-color:#1b5e20;
+}
 
-        footer {
-            background-color: #2e7d32;
-            color: white;
-            text-align: center;
-            padding: 12px;
-            position: fixed;
-            width: 100%;
-            bottom: 0;
-        }
-    </style>
+.features{
+padding:40px;
+text-align:center;
+}
+
+.feature-box{
+background-color:white;
+display:inline-block;
+width:250px;
+margin:15px;
+padding:20px;
+border-radius:6px;
+box-shadow:0 0 5px rgba(0,0,0,0.2);
+}
+
+footer{
+background-color:#2e7d32;
+color:white;
+text-align:center;
+padding:12px;
+position:fixed;
+width:100%;
+bottom:0;
+}
+</style>
 </head>
 
 <body>
 
 <header>
-    <h1>Tractor Managment</h1>
-    <p>Hire Tractors & Farm Workers Easily</p>
+<h1>Tractor Management</h1>
+<p>Hire Tractors & Farm Workers Easily</p>
 </header>
 
 <nav>
 <a href="/index">Home</a>
 <a href="/admin-booking">Admin</a>
-<a href="/veiw-tractor">Tractors</a>
-<a href="/view-worker">Workers</a>
+<a href="/tractors">Tractors</a>
+<a href="/workers">Workers</a>
 <a href="/driver">Driver</a>
-<a href="/login">Logout</a>
+<a href="/">Logout</a>
 </nav>
 
 <section class="hero">
-    <h2>One Platform for All Farm Services</h2>
-    <p>
-        Farmers can hire tractors and skilled farm workers quickly and affordably.
-    </p>
-    <button onclick="window.location.href='/view-services.html'">
+<h2>One Platform for All Farm Services</h2>
+
+<p>
+Farmers can hire tractors and skilled farm workers quickly and affordably.
+</p>
+
+<div class="service-area">
+
+<img src="https://assets.khetigaadi.com/new-tractor/Mahindra-Yuvo-575-DI1735709902_hAsKJfpk3.png">
+
+<button onclick="window.location.href='/view-services'">
 View Services
 </button>
+
+<img src="https://assets.khetigaadi.com/new-tractor/Swaraj-744-FE-4WD1733124209_Q_bRfo-Hu.png">
+
+</div>
+
 </section>
 
 <section class="features">
-    <div class="feature-box">
-        <h3>🚜 Tractor Hiring</h3>
-        <p>Hire tractors for ploughing, harvesting and transportation.</p>
-        <button onclick="window.location.href='/tractor'"></button>
-    </div>
 
-    <div class="feature-box">
-        <h3>👨‍🌾 Worker Hiring</h3>
-        <p>Find skilled farm workers for all types of agricultural work.</p>
-        <button onclick="window.location.href='/worker'"></button>
-    </div>
+<div class="feature-box">
+<h3>🚜 Tractor Hiring</h3>
+<p>Hire tractors for ploughing, harvesting and transportation.</p>
+<button onclick="window.location.href='/tractor'"></button>
+</div>
 
-    <div class="feature-box">
-        <h3>📅  Easy Booking</h3>
-        <p>Simple booking system with date and service selection.</p>
-    </div>
+<div class="feature-box">
+<h3>👨‍🌾 Worker Hiring</h3>
+<p>Find skilled farm workers for all types of agricultural work.</p>
+<button onclick="window.location.href='/worker'"></button>
+</div>
+
+<div class="feature-box">
+<h3>📅 Easy Booking</h3>
+<p>Simple booking system with date and service selection.</p>
+<button onclick="window.location.href='booking.html'"></button>
+</div>
+
 </section>
-
 
 </body>
 </html>
