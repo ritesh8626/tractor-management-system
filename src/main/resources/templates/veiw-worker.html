@@ -79,7 +79,7 @@ margin:5px;
 <th>Experience</th>
 <th>Charge (₹/day)</th>
 <th>Status</th>
-<th>Action</th>
+<th id="actionHeader">Action</th>
 </tr>
 
 <tr>
@@ -88,7 +88,7 @@ margin:5px;
 <td>5 Years</td>
 <td>500</td>
 <td class="status">Available</td>
-<td><button onclick="editStatus(this)">Edit</button></td>
+<td class="action"><button onclick="editStatus(this)">Edit</button></td>
 </tr>
 
 <tr>
@@ -97,7 +97,7 @@ margin:5px;
 <td>3 Years</td>
 <td>450</td>
 <td class="status">Not Available</td>
-<td><button onclick="editStatus(this)">Edit</button></td>
+<td class="action"><button onclick="editStatus(this)">Edit</button></td>
 </tr>
 
 <tr>
@@ -106,23 +106,22 @@ margin:5px;
 <td>6 Years</td>
 <td>500</td>
 <td class="status">Available</td>
-<td><button onclick="editStatus(this)">Edit</button></td>
-       
-</tr>
-<tr>
-<td>Rakesh</td>
-<td>Seeder </td>
-<td>1 Years</td>
-<td>400/450</td>
-<td class="status">Not Available</td>
-<td><button onclick="editStatus(this)">Edit</button></td>
+<td class="action"><button onclick="editStatus(this)">Edit</button></td>
 </tr>
 
+<tr>
+<td>Rakesh</td>
+<td>Seeder</td>
+<td>1 Years</td>
+<td>400</td>
+<td class="status">Not Available</td>
+<td class="action"><button onclick="editStatus(this)">Edit</button></td>
+</tr>
 
 </table>
 
 
-<div class="form-box">
+<div class="form-box" id="addWorkerBox">
 
 <h3>Add Worker</h3>
 
@@ -143,22 +142,55 @@ margin:5px;
 
 <script>
 
+/* Get role */
+
+let role = localStorage.getItem("userRole");
+
+/* If farmer hide admin controls */
+
+if(role !== "admin"){
+
+document.getElementById("addWorkerBox").style.display="none";
+
+document.getElementById("actionHeader").style.display="none";
+
+document.querySelectorAll(".action").forEach(el=>{
+el.style.display="none";
+});
+
+}
+
+
+/* Change Status */
+
 function editStatus(button){
+
+if(role !== "admin"){
+alert("Only Admin can change status");
+return;
+}
 
 let row=button.parentElement.parentElement;
 
-let statusCell=row.querySelector(".status");
+let status=row.querySelector(".status");
 
-if(statusCell.innerText==="Available"){
-statusCell.innerText="Not Available";
+if(status.innerText==="Available"){
+status.innerText="Not Available";
 }else{
-statusCell.innerText="Available";
+status.innerText="Available";
 }
 
 }
 
+
+/* Add Worker */
 
 function addWorker(){
+
+if(role !== "admin"){
+alert("Only Admin can add workers");
+return;
+}
 
 let name=document.getElementById("name").value;
 let skill=document.getElementById("skill").value;
@@ -167,7 +199,7 @@ let charge=document.getElementById("charge").value;
 let status=document.getElementById("status").value;
 
 if(name==="" || skill==="" || experience==="" || charge===""){
-alert("Please fill all fields");
+alert("Fill all fields");
 return;
 }
 
@@ -181,13 +213,8 @@ row.innerHTML=`
 <td>${experience}</td>
 <td>${charge}</td>
 <td class="status">${status}</td>
-<td><button onclick="editStatus(this)">Edit</button></td>
+<td class="action"><button onclick="editStatus(this)">Edit</button></td>
 `;
-
-document.getElementById("name").value="";
-document.getElementById("skill").value="";
-document.getElementById("experience").value="";
-document.getElementById("charge").value="";
 
 }
 

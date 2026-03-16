@@ -1,153 +1,116 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Login - Tractor Managment</title>
+<title>Login - Tractor Management</title>
 
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-        }
+<style>
 
-        header {
-            background-color: #2e7d32;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
+body{
+font-family:Arial;
+background:#f4f4f4;
+margin:0;
+}
 
-        nav {
-            background-color: #388e3c;
-            padding: 10px;
-            text-align: center;
-        }
+/* HEADER */
 
-        nav a {
-            color: white;
-            margin: 0 15px;
-            text-decoration: none;
-            font-weight: bold;
-        }
+header{
+background:#2e7d32;
+color:white;
+padding:20px;
+text-align:center;
+}
 
-        .login-container {
-            background-color: white;
-            width: 350px;
-            margin: 50px auto;
-            padding: 25px;
-            border-radius: 6px;
-            box-shadow: 0 0 8px rgba(0,0,0,0.2);
-        }
+/* LOGIN BOX */
 
-        h2 {
-            text-align: center;
-            color: #2e7d32;
-        }
+.login-container{
+width:350px;
+margin:80px auto;
+background:white;
+padding:25px;
+border-radius:6px;
+box-shadow:0 0 6px gray;
+text-align:center;
+}
 
-        label {
-            display: block;
-            margin-top: 12px;
-            font-weight: bold;
-        }
+input,select{
+width:90%;
+padding:10px;
+margin:8px;
+border:1px solid #ccc;
+border-radius:4px;
+}
 
-        input, select {
-            width: 100%;
-            padding: 8px;
-            margin-top: 5px;
-        }
+button{
+width:95%;
+padding:10px;
+background:#2e7d32;
+color:white;
+border:none;
+cursor:pointer;
+border-radius:4px;
+font-size:15px;
+}
 
-        button {
-            width: 100%;
-            margin-top: 20px;
-            padding: 10px;
-            background-color: #2e7d32;
-            color: white;
-            border: none;
-            font-size: 16px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
+button:hover{
+background:#1b5e20;
+}
 
-        button:hover {
-            background-color: #1b5e20;
-        }
+</style>
 
-        .error {
-            color: red;
-            text-align: center;
-            margin-top: 10px;
-            display: none;
-        }
-
-        footer {
-            background-color: #2e7d32;
-            color: white;
-            text-align: center;
-            padding: 10px;
-            position: fixed;
-            width: 100%;
-            bottom: 0;
-        }
-    </style>
 </head>
 
 <body>
 
 <header>
-    <h1>Tractor Managment</h1>
-    <p>Login Page</p>
+<h1>Tractor Management System</h1>
 </header>
 
- 
-
 <div class="login-container">
-    <h2>User Login</h2>
 
-    <form onsubmit="loginUser(); return false;">
-        <label>Email</label>
-        <input type="email" id="email" required>
+<h2>User Login</h2>
 
-        <label>Password</label>
-        <input type="password" id="password" required>
+<input type="email" id="email" placeholder="Enter Email">
 
-        <label>Login As</label>
-        <select id="role" required>
-            <option value="">-- Select Role --</option>
-            <option>Farmer</option>
-            <option>Service Provider</option>
-            <option>Admin</option>
-        </select>
+<input type="password" id="password" placeholder="Enter Password">
 
-        <button type="submit">Login</button>
-    </form>
+<select id="role">
+<option value="">Select Role</option>
+<option value="admin">Admin</option>
+<option value="farmer">Farmer</option>
+</select>
 
-    <div class="error" id="errorMsg">
-        Invalid login details!
-    </div>
+<button onclick="loginUser()">Login</button>
+
 </div>
 
 <script>
-function loginUser() {
 
-    let email = document.getElementById("email").value;
-    let password = document.getElementById("password").value;
-    let role = document.getElementById("role").value;
+function loginUser(){
 
-    if(email && password && role){
+let email=document.getElementById("email").value;
+let password=document.getElementById("password").value;
+let role=document.getElementById("role").value;
 
-        window.location.href="/index";
-
-    }else{
-
-        document.getElementById("errorMsg").style.display="block";
-
-    }
+if(email==="" || password==="" || role===""){
+alert("Please fill all fields");
+return;
 }
+
+/* Simple demo login */
+
+if(role==="admin"){
+localStorage.setItem("userRole","admin");
+window.location.href="admin-dashboard.html";
+}
+
+else if(role==="farmer"){
+localStorage.setItem("userRole","farmer");
+window.location.href="farmer-dashboard.html";
+}
+
+}
+
 </script>
-
-
-
 
 </body>
 </html>

@@ -78,7 +78,7 @@ margin:5px;
 <th>Model</th>
 <th>Rent (₹/hour)</th>
 <th>Status</th>
-<th>Action</th>
+<th class="adminOnly">Action</th>
 </tr>
 
 <tr>
@@ -86,7 +86,7 @@ margin:5px;
 <td>2022</td>
 <td>800</td>
 <td class="status">Available</td>
-<td><button onclick="editStatus(this)">Edit</button></td>
+<td class="adminOnly"><button onclick="editStatus(this)">Edit</button></td>
 </tr>
 
 <tr>
@@ -94,13 +94,13 @@ margin:5px;
 <td>2021</td>
 <td>900</td>
 <td class="status">Not Available</td>
-<td><button onclick="editStatus(this)">Edit</button></td>
+<td class="adminOnly"><button onclick="editStatus(this)">Edit</button></td>
 </tr>
 
 </table>
 
 
-<div class="form-box">
+<div class="form-box adminOnly" id="addBox">
 
 <h3>Add Tractor</h3>
 
@@ -120,26 +120,46 @@ margin:5px;
 
 <script>
 
+let role = localStorage.getItem("userRole");
+
+// Hide admin options if farmer
+if(role !== "admin"){
+
+document.querySelectorAll(".adminOnly").forEach(el=>{
+el.style.display="none";
+});
+
+}
+
+
+// Change tractor status
 function editStatus(button){
+
+if(role !== "admin"){
+alert("Only Admin can change tractor status");
+return;
+}
 
 let row=button.parentElement.parentElement;
 
 let statusCell=row.querySelector(".status");
 
 if(statusCell.innerText==="Available"){
-
 statusCell.innerText="Not Available";
-
 }else{
-
 statusCell.innerText="Available";
-
 }
 
 }
 
 
+// Add new tractor
 function addTractor(){
+
+if(role !== "admin"){
+alert("Only Admin can add tractors");
+return;
+}
 
 let name=document.getElementById("name").value;
 let model=document.getElementById("model").value;
@@ -147,10 +167,8 @@ let rent=document.getElementById("rent").value;
 let status=document.getElementById("status").value;
 
 if(name==="" || model==="" || rent===""){
-
 alert("Please fill all fields");
 return;
-
 }
 
 let table=document.getElementById("tractorTable");
@@ -162,12 +180,8 @@ row.innerHTML=`
 <td>${model}</td>
 <td>${rent}</td>
 <td class="status">${status}</td>
-<td><button onclick="editStatus(this)">Edit</button></td>
+<td class="adminOnly"><button onclick="editStatus(this)">Edit</button></td>
 `;
-
-document.getElementById("name").value="";
-document.getElementById("model").value="";
-document.getElementById("rent").value="";
 
 }
 

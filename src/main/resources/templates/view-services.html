@@ -1,120 +1,190 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>View All Services - Tractor Management</title>
+<title>My Bookings - Tractor Management</title>
 
-    <style>
-        body {
-            font-family: Arial;
-            background: #f4f4f4;
-            margin: 0;
-        }
+<style>
 
-        header {
-            background: #2e7d32;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
+body{
+font-family:Arial;
+background:#f4f4f4;
+margin:0;
+}
 
-        .container {
-            width: 90%;
-            margin: 30px auto;
-            background: white;
-            padding: 25px;
-            border-radius: 6px;
-            box-shadow: 0 0 8px gray;
-        }
+header{
+background:#2e7d32;
+color:white;
+text-align:center;
+padding:20px;
+}
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
+.container{
+width:90%;
+margin:30px auto;
+background:white;
+padding:25px;
+border-radius:6px;
+box-shadow:0 0 8px gray;
+}
 
-        table, th, td {
-            border: 1px solid black;
-        }
+table{
+width:100%;
+border-collapse:collapse;
+}
 
-        th {
-            background: #388e3c;
-            color: white;
-            padding: 10px;
-        }
+table,th,td{
+border:1px solid black;
+}
 
-        td {
-            padding: 8px;
-            text-align: center;
-        }
+th{
+background:#388e3c;
+color:white;
+padding:10px;
+}
 
-        button {
-            padding: 6px 10px;
-            background: #2e7d32;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
+td{
+padding:8px;
+text-align:center;
+}
 
-        button:hover {
-            background: #1b5e20;
-        }
-    </style>
+.paid{
+color:green;
+font-weight:bold;
+}
+
+.pending{
+color:red;
+font-weight:bold;
+}
+
+button{
+padding:5px 10px;
+background:#2e7d32;
+color:white;
+border:none;
+cursor:pointer;
+}
+
+button:hover{
+background:#1b5e20;
+}
+
+</style>
+
 </head>
 
 <body>
 
 <header>
-    <h1>All Farmer Bookings</h1>
+<h1>My Tractor Bookings</h1>
 </header>
 
 <div class="container">
 
-    <table id="serviceTable">
-        <tr>
-            <th>Farmer Name</th>
-            <th>Service</th>
-            <th>Booking Date</th>
-            <th>Status</th>
-            <th>Total Amount</th>
-            <th>Paid</th>
-            <th>Remaining</th>
-        </tr>
-    </table>
+<table id="bookingTable">
+
+<tr>
+<th>Farmer Name</th>
+<th>Service</th>
+<th>Booking Date</th>
+<th>Total Amount</th>
+<th>Paid Amount</th>
+<th>Remaining</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+
+</table>
 
 </div>
 
 <script>
 
-// Example data (you can connect from booking page later)
 let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
 
-// If no data, create demo records
 if(bookings.length === 0){
-    bookings = [
-        {name:"Ramesh", service:"Tractor", date:"2026-02-20", total:5000, paid:3000},
-        {name:"Suresh", service:"Worker", date:"2026-02-25", total:4000, paid:4000}
-    ];
+
+bookings = [
+
+{ name:"Ramesh", service:"Tractor", date:"2026-03-10", total:5000, paid:2000 },
+
+{ name:"Ritesh", service:"Worker", date:"2026-03-14", total:4000, paid:4000 }
+
+];
+
 }
 
-let table = document.getElementById("serviceTable");
+function loadTable(){
 
-let today = new Date().toISOString().split("T")[0];
+let table = document.getElementById("bookingTable");
 
-bookings.forEach(b => {
+table.innerHTML = `
+<tr>
+<th>Farmer Name</th>
+<th>Service</th>
+<th>Booking Date</th>
+<th>Total Amount</th>
+<th>Paid Amount</th>
+<th>Remaining</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+`;
 
-    let status = (b.date < today) ? "Booked Earlier" : "Booked Today/Upcoming";
-    let remaining = b.total - b.paid;
+bookings.forEach((b,index)=>{
 
-    let row = table.insertRow(-1);
+let remaining = b.total - b.paid;
 
-    row.insertCell(0).innerHTML = b.name;
-    row.insertCell(1).innerHTML = b.service;
-    row.insertCell(2).innerHTML = b.date;
-    row.insertCell(3).innerHTML = status;
-    row.insertCell(4).innerHTML = "₹ " + b.total;
-    row.insertCell(5).innerHTML = "₹ " + b.paid;
-    row.insertCell(6).innerHTML = "₹ " + remaining;
+let status = (remaining === 3000) ? "Paid" : "Pending";
+
+let row = table.insertRow(-1);
+
+row.insertCell(0).innerHTML = b.name;
+row.insertCell(1).innerHTML = b.service;
+row.insertCell(2).innerHTML = b.date;
+row.insertCell(3).innerHTML = "₹ " + b.total;
+row.insertCell(4).innerHTML = "₹ " + b.paid;
+row.insertCell(5).innerHTML = "₹ " + remaining;
+
+let statusCell = row.insertCell(6);
+statusCell.innerHTML = status;
+
+if(status==="Paid"){
+statusCell.classList.add("paid");
+}else{
+statusCell.classList.add("pending");
+}
+
+let actionCell = row.insertCell(7);
+
+if(status==="Pending"){
+
+let btn=document.createElement("button");
+btn.innerText="Pay";
+
+btn.onclick=function(){
+
+b.paid = b.total;
+
+localStorage.setItem("bookings",JSON.stringify(bookings));
+
+loadTable();
+
+};
+
+actionCell.appendChild(btn);
+
+}else{
+
+actionCell.innerHTML="✔ Paid";
+
+}
 
 });
+
+}
+
+loadTable();
 
 </script>
 
