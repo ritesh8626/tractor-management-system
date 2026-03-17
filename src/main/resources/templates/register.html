@@ -112,10 +112,28 @@
 </div>
 
 <script>
-    function registerUser() {
-        alert("Registration successful! Please login.");
-        window.location.href = "login.html";
+function registerUser(){
+
+let user = {
+    name: document.getElementById("name").value,
+    email: document.getElementById("email").value,
+    password: document.getElementById("password").value,
+    role: document.getElementById("role").value
+};
+
+fetch("/auth/register",{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify(user)
+})
+.then(res=>res.text())
+.then(data=>{
+    alert(data);
+    if(data==="Registered Successfully"){
+        window.location.href="/login";
     }
+});
+}
 </script>
 
 </body>

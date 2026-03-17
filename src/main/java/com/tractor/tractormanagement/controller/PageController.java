@@ -6,14 +6,26 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class PageController {
 
-    @GetMapping("/")
+   @GetMapping("/")
     public String login() {
         return "login";
     }
 
-    @GetMapping("/index")
-    public String index() {
-        return "index";
+    @GetMapping("/login")
+    public String loginPage() {
+        return "login";
+    }
+
+    // 👇 Farmer Dashboard
+    @GetMapping("/farmer-dashboard")
+    public String farmerDashboard() {
+        return "farmer-dashboard";
+    }
+
+    // 👇 Admin Dashboard
+    @GetMapping("/admin-dashboard")
+    public String adminDashboard() {
+        return "admin-dashboard";
     }
 
     @GetMapping("/register")
