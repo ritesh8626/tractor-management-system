@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class PageController {
 
    @GetMapping("/register")
-    public String registerString() {
+    public String register() {
         return "register";
     }
 
@@ -28,10 +28,7 @@ public class PageController {
         return "admin-dashboard";
     }
 
-    @GetMapping("/register")
-    public String register() {
-        return "register";
-    }
+
 
     @GetMapping("/tractors")
     public String tractors() {
