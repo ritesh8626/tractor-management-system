@@ -4,14 +4,11 @@
 <title>Login - Tractor Management</title>
 
 <style>
-
 body{
 font-family:Arial;
 background:#f4f4f4;
 margin:0;
 }
-
-/* HEADER */
 
 header{
 background:#2e7d32;
@@ -19,8 +16,6 @@ color:white;
 padding:20px;
 text-align:center;
 }
-
-/* LOGIN BOX */
 
 .login-container{
 width:350px;
@@ -54,7 +49,6 @@ font-size:15px;
 button:hover{
 background:#1b5e20;
 }
-
 </style>
 
 </head>
@@ -69,9 +63,9 @@ background:#1b5e20;
 
 <h2>User Login</h2>
 
-<input type="email" id="email" placeholder="Enter Email">
+<input type="email" id="email" placeholder="Enter Email" required>
 
-<input type="password" id="password" placeholder="Enter Password">
+<input type="password" id="password" placeholder="Enter Password" required>
 
 <select id="role">
 <option value="">Select Role</option>
@@ -81,36 +75,38 @@ background:#1b5e20;
 
 <button onclick="loginUser()">Login</button>
 
+<p>New user? <a href="register.html">Register here</a></p>
+
 </div>
 
 <script>
 
 function loginUser(){
 
-let user = {
-    email: document.getElementById("email").value,
-    password: document.getElementById("password").value
-};
+let email = document.getElementById("email").value;
+let password = document.getElementById("password").value;
+let role = document.getElementById("role").value;
 
-fetch("/auth/login",{
-    method:"POST",
-    headers:{"Content-Type":"application/json"},
-    body:JSON.stringify(user)
-})
-.then(res=>res.text())
-.then(role=>{
+if(email === "" || password === ""){
+    alert("Please enter email and password");
+    return;
+}
 
-    if(role==="admin"){
-        window.location.href="/admin-dashboard";
-    }
-    else if(role==="farmer"){
-        window.location.href="/farmer-dashboard";
-    }
-    else{
-        alert("Invalid Login");
-    }
+if(role === ""){
+    alert("Please select role");
+    return;
+}
 
-});
+// ✅ Save role in browser
+localStorage.setItem("userRole", role);
+
+// ✅ Redirect based on role
+if(role === "admin"){
+    window.location.href = "admin-dashboard.html";
+}
+else if(role === "farmer"){
+    window.location.href = "farmer-dashboard.html";
+}
 
 }
 

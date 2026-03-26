@@ -4,7 +4,6 @@
 <title>My Bookings - Tractor Management</title>
 
 <style>
-
 body{
 font-family:Arial;
 background:#f4f4f4;
@@ -68,7 +67,6 @@ cursor:pointer;
 button:hover{
 background:#1b5e20;
 }
-
 </style>
 
 </head>
@@ -81,38 +79,20 @@ background:#1b5e20;
 
 <div class="container">
 
-<table id="bookingTable">
-
-<tr>
-<th>Farmer Name</th>
-<th>Service</th>
-<th>Booking Date</th>
-<th>Total Amount</th>
-<th>Paid Amount</th>
-<th>Remaining</th>
-<th>Status</th>
-<th>Action</th>
-</tr>
-
-</table>
+<table id="bookingTable"></table>
 
 </div>
 
 <script>
 
-let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
+// ✅ Two sample entries (one paid, one unpaid)
+let bookings = JSON.parse(localStorage.getItem("bookings")) || [
 
-if(bookings.length === 0){
+{ name:"Ramesh", service:"Tractor", date:"2026-03-10", total:5000, paid:5000 }, // Paid
 
-bookings = [
-
-{ name:"Ramesh", service:"Tractor", date:"2026-03-10", total:5000, paid:2000 },
-
-{ name:"Ritesh", service:"Worker", date:"2026-03-14", total:4000, paid:4000 }
+{ name:"Ritesh", service:"Worker", date:"2026-03-14", total:4000, paid:1500 }  // Pending
 
 ];
-
-}
 
 function loadTable(){
 
@@ -135,7 +115,8 @@ bookings.forEach((b,index)=>{
 
 let remaining = b.total - b.paid;
 
-let status = (remaining === 3000) ? "Paid" : "Pending";
+// ✅ Correct status logic
+let status = (remaining === 0) ? "Paid" : "Pending";
 
 let row = table.insertRow(-1);
 
@@ -157,6 +138,7 @@ statusCell.classList.add("pending");
 
 let actionCell = row.insertCell(7);
 
+// ✅ Payment button for pending
 if(status==="Pending"){
 
 let btn=document.createElement("button");
